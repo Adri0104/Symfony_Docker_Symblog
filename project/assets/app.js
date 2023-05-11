@@ -7,7 +7,13 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
-import { Carousel, initTE } from "tw-elements";
-initTE({ Carousel });
+// Initialization for ES Users
+import {
+    Collapse,
+    Dropdown,
+    initTE,
+} from "tw-elements";
+
+initTE({ Collapse, Dropdown });
 
 console.log("ok");

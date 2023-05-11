@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PostController extends AbstractController
 {
-    #[Route('/', name: 'app_post', methods: ['GET'])]
+    #[Route('/', name: 'blog.index', methods: ['GET'])]
     public function index(PostRepository $postRepository, Request $request): Response
     {
         return $this->render('pages/blog/index.html.twig', [
