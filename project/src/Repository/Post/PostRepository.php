@@ -2,6 +2,7 @@
 
 namespace App\Repository\Post;
 
+use App\Entity\Post\Category;
 use App\Entity\Post\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -32,21 +33,19 @@ class PostRepository extends ServiceEntityRepository
 //     *
 //     * @return PaginationInterface
      */
-    public function findPublished(int $page/*, ?Category $category = null, ?Tag $tag = null*/): PaginationInterface
+    public function findPublished(int $page, ?Category $category = null/*, ?Tag $tag = null*/): PaginationInterface
     {
         $data = $this->createQueryBuilder('p')
             ->where('p.state LIKE :state')
             ->setParameter('state', '%STATE_PUBLISHED%')
-            ->addOrderBy('p.createdAt', 'DESC')
-            ->getQuery()
-            ->getResult();
+            ->addOrderBy('p.createdAt', 'DESC');
 
-//        if (isset($category)) {
-//            $data = $data
-//                ->join('p.categories', 'c')
-//                ->andWhere(':category IN (c)')
-//                ->setParameter('category', $category);
-//        }
+        if (isset($category)) {
+            $data = $data
+                ->join('p.categories', 'c')
+                ->andWhere(':category IN (c)')
+                ->setParameter('category', $category);
+        }
 //
 //        if (isset($tag)) {
 //            $data = $data
@@ -55,8 +54,8 @@ class PostRepository extends ServiceEntityRepository
 //                ->setParameter('tag', $tag);
 //        }
 
-//        $data->getQuery()
-//            ->getResult();
+        $data->getQuery()
+            ->getResult();
 
         $posts = $this->paginatorInterface->paginate($data, $page, 9);
 

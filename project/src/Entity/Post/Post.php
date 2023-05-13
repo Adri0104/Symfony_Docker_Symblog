@@ -50,8 +50,8 @@ class Post
     #[Assert\NotNull()]
     private \DateTimeImmutable $createdAt;
 
-//    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'posts')]
-//    private Collection $categories;
+    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'posts')]
+    private Collection $categories;
 //
 //    #[ORM\ManyToMany(targetEntity: Tag::class, mappedBy: 'posts')]
 //    private Collection $tags;
@@ -67,7 +67,7 @@ class Post
     {
         $this->updatedAt = new \DateTimeImmutable();
         $this->createdAt = new \DateTimeImmutable();
-//        $this->categories = new ArrayCollection();
+        $this->categories = new ArrayCollection();
 //        $this->tags = new ArrayCollection();
 //        $this->likes = new ArrayCollection();
 //        $this->comments = new ArrayCollection();
@@ -174,29 +174,29 @@ class Post
         return $this;
     }
 
-//    public function getCategories(): Collection
-//    {
-//        return $this->categories;
-//    }
-//
-//    public function addCategory(Category $category): self
-//    {
-//        if (!$this->categories->contains($category)) {
-//            $this->categories[] = $category;
-//            $category->addPost($this);
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function removeCategory(Category $category): self
-//    {
-//        if (!$this->categories->contains($category)) {
-//            $category->removePost($this);
-//        }
-//
-//        return $this;
-//    }
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $category->removePost($this);
+        }
+
+        return $this;
+    }
 //
 //    public function getTags(): Collection
 //    {
