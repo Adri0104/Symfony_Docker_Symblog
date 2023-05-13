@@ -8,12 +8,21 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 // Initialization for ES Users
+// import {
+//     Collapse,
+//     Dropdown,
+//     Ripple,
+//     initTE,
+// } from "tw-elements";
+// Initialization for ES Users
 import {
-    Collapse,
     Dropdown,
+    Ripple,
     initTE,
 } from "tw-elements";
 
-initTE({ Collapse, Dropdown });
+initTE({ Dropdown, Ripple });
+
+// initTE({ Collapse, Dropdown, Ripple });
 
 console.log("ok");
