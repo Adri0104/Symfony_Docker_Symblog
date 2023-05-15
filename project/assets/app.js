@@ -24,5 +24,15 @@ import {
 initTE({ Dropdown, Ripple });
 
 // initTE({ Collapse, Dropdown, Ripple });
+import Like from './scripts/like';
 
-console.log("ok");
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Webpack Encore is working !');
+
+    // Like's system
+    const likeElements = [].slice.call(document.querySelectorAll('a[data-action="like"]'));
+    if (likeElements) {
+        new Like(likeElements);
+    }
+})
+

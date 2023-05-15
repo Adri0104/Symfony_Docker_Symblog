@@ -2,7 +2,7 @@
 
 namespace App\Entity\Post;
 
-//use App\Entity\User;
+use App\Entity\User;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\Post\PostRepository;
@@ -56,9 +56,9 @@ class Post
     #[ORM\ManyToMany(targetEntity: Tag::class, mappedBy: 'posts')]
     private Collection $tags;
 //
-//    #[ORM\ManyToMany(targetEntity: User::class)]
-//    #[JoinTable('user_post_like')]
-//    private Collection $likes;
+    #[ORM\ManyToMany(targetEntity: User::class)]
+    #[JoinTable('user_post_like')]
+    private Collection $likes;
 //
 //    #[ORM\OneToMany(mappedBy: 'post', targetEntity: Comment::class, orphanRemoval: true)]
 //    private Collection $comments;
@@ -69,7 +69,7 @@ class Post
         $this->createdAt = new \DateTimeImmutable();
         $this->categories = new ArrayCollection();
         $this->tags = new ArrayCollection();
-//        $this->likes = new ArrayCollection();
+        $this->likes = new ArrayCollection();
 //        $this->comments = new ArrayCollection();
     }
 
@@ -222,26 +222,26 @@ class Post
         return $this;
     }
 //
-//    public function getLikes(): Collection
-//    {
-//        return $this->likes;
-//    }
-//
-//    public function addLike(User $like): self
-//    {
-//        if (!$this->likes->contains($like)) {
-//            $this->likes[] = $like;
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function removeLike(User $like): self
-//    {
-//        $this->likes->removeElement($like);
-//
-//        return $this;
-//    }
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(User $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+        }
+
+        return $this;
+    }
+
+    public function removeLike(User $like): self
+    {
+        $this->likes->removeElement($like);
+
+        return $this;
+    }
 //
 //    /**
 //     * @return Collection<int, Comment>
@@ -274,20 +274,20 @@ class Post
 //    }
 //
 //
-//    public function isLikedByUser(User $user): bool
-//    {
-//        return $this->likes->contains($user);
-//    }
+    public function isLikedByUser(User $user): bool
+    {
+        return $this->likes->contains($user);
+    }
 //
-//    /**
-//     * Get the number of likes
-//     *
-//     * @return integer
-//     */
-//    public function howManyLikes(): int
-//    {
-//        return count($this->likes);
-//    }
+    /**
+     * Get the number of likes
+     *
+     * @return integer
+     */
+    public function howManyLikes(): int
+    {
+        return count($this->likes);
+    }
 
 
     public function __toString()
